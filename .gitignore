@@ -1,0 +1,84 @@
+# ROS-specific ignores
+/build/
+/devel/
+/install/
+/logs/
+/.catkin_workspace
+*.catkin
+*.ros
+*.rosinstall
+*.backup
+*.swp
+*.swo
+*.bag
+*.bag.active
+*.bag.part
+
+# Python-specific ignores
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Common IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+
+# Virtual environment ignores
+venv/
+env/
+.virtualenv/
+.venv/
+ENV/
+bin/
+lib/
+lib64/
+include/
+pyvenv.cfg
+
+# System and temporary files
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+*.log
+*.bak
+*.swp
+*.swo
+
+# Miscellaneous
+*.o
+*.so
+*.a
+*.la
+*.lai
+*.d
+*.i
+*.ipynb_checkpoints/
+
+# Ignore local configuration files (optional: adjust if you want to commit specific configs)
+*.local
+*.user
+config/*.local
