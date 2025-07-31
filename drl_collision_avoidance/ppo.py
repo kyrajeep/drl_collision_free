@@ -13,17 +13,17 @@ class RobotEnv(gym.Env):
     def __init__(self):
         super(RobotEnv, self).__init__()
         # Action space: linear velocity (v), angular velocity (w)
-        self.action_space = spaces.Box(low=np.array([-1.0, -1.0]), high=np.array([1.0, 1.0]), dtype=np.float32)
-        # Observation space: laser scan (e.g., 10 ranges) + goal direction
-        self.observation_space = spaces.Box(low=0.0, high=10.0, shape=(11,), dtype=np.float32)
-        self.scan_data = np.ones(10) * 10.0  # Placeholder: max range
+        self.action_space = spaces.Box(low=np.array([-100.0, -2.0]), high=np.array([100.0, 2.0]), dtype=np.float32)
+        # Observation space: laser scan + goal direction
+        self.observation_space = spaces.Box(low=0.0, high=100.0, shape=(11,), dtype=np.float32)
+        self.scan_data = np.ones(10) * 100.0  # TODO Placeholder: max range
         self.goal_angle = 0.0  # Relative angle to goal
         self.min_distance = 0.3  # Collision threshold
-        self.max_steps = 200  # Max steps per episode
+        self.max_steps = 100  # Max steps per episode
 
     def reset(self):
         self.scan_data = np.ones(10) * 10.0
-        # need goal distance as well as angle?
+        #TODO: goal angle... for the target?
         self.goal_angle = np.random.uniform(-np.pi, np.pi)
         self.step_count = 0
         return np.concatenate([self.scan_data, [self.goal_angle]])
@@ -31,23 +31,26 @@ class RobotEnv(gym.Env):
     def step(self, action):
         self.step_count += 1
         v, w = action
-        # Simulate robot movement (simplified)
+        # closest obstacle
         min_distance = np.min(self.scan_data)
         # TODO: reward function based on distance to goal and collision avoidance
-        reward = 0.1 * np.cos(self.goal_angle) - 0.5 * abs(w)
+        # what does putting cos mean again? 
+        # even though high angular velocity is not safe, sometimes may be necessary
+        reward = 0.1 * np.cos(self.goal_angle) - 0.2 * abs(w)
         if min_distance < self.min_distance:
+            # if we are within pre-collision range, heavy penalty
             reward -= 10.0
             done = True
         else:
             done = self.step_count >= self.max_steps
-        # Update goal angle (simplified)
+        # TODO: Update goal angle 
         self.goal_angle -= w * 0.1
         self.goal_angle = np.clip(self.goal_angle, -np.pi, np.pi)
         return np.concatenate([self.scan_data, [self.goal_angle]]), reward, done, {}
 
     def update_scan(self, scan_data):
-        # Update laser scan data (e.g., 10 evenly spaced ranges)
-        self.scan_data = np.array(scan_data)[:10]
+        # Update laser scan data (100 evenly spaced ranges)
+        self.scan_data = np.array(scan_data)[:100]
 
 # ROS 2 Node for DRL Collision Avoidance
 class DRLCollisionAvoidanceNode(Node):
