@@ -1,0 +1,49 @@
+DRL Collision Avoidance Module Specifications
+
+1. Overview
+- The module uses Deep Reinforcement Learning (DRL) to enable robots to avoid collisions in dynamic environments.
+
+2. Functional Requirements
+- Input: Sensor data (e.g., LiDAR, camera, odometry).
+- Output: Safe navigation commands (velocity, steering).
+- Real-time decision making for obstacle avoidance.
+- Training and inference modes supported.
+
+3. System Architecture
+- Core DRL agent (e.g., DQN, PPO).
+- Environment interface for ROS2 topics/services.
+- Data preprocessing and normalization.
+- Model checkpointing and logging.
+
+4. Integration
+- ROS2 node for publishing/subscribing to relevant topics.
+- Configurable parameters (learning rate, discount factor, etc.).
+- Launch files for training and evaluation.
+
+5. Testing
+- Unit tests for agent and environment wrappers.
+- Simulation scenarios for validation.
+- Performance metrics: success rate, collision count, episode length.
+
+6. Documentation
+- Usage instructions.
+- API reference.
+- Example launch and config files.
+
+---
+
+Folder Structure Recommendations:
+- src/drl_collision_avoidance/
+    - agent/
+    - environment/
+    - scripts/
+    - config/
+    - launch/
+    - tests/
+    - docs/
+
+Steps to Proceed:
+1. Identify working files and back them up.
+2. Reorganize files into the recommended structure.
+3. Update imports and launch files as needed.
+4. Test functionality after each change.
