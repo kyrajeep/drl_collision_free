@@ -26,8 +26,8 @@ class TestAgent():
         # Set up the agent with a simple environment
         env = gym.make('CartPole-v1')
         agent = PPOAgent(env=env, total_timesteps=1000, save_path='ppo_test_model.zip')
-        return agent
-    def teardown(self):
+        yield agent
+        # Cleanup after tests
         if os.path.exists('ppo_test_model.zip'):
             os.remove('ppo_test_model.zip')
             
