@@ -69,6 +69,7 @@ class DRLCollisionAvoidanceNode(Node):
         valid_ranges = [r for r in ranges if msg.range_min <= r <= msg.range_max]
         if len(valid_ranges) >= 10:
             self.env.update_scan(valid_ranges)
+        #TODO: return
 
     def timer_callback(self):
         if self.model is None:
@@ -80,6 +81,7 @@ class DRLCollisionAvoidanceNode(Node):
         twist.linear.x = float(action[0])
         twist.angular.z = float(action[1])
         self.publisher.publish(twist)
+        #TODO: return 
 
 def train_model():
     env = RobotEnv()
