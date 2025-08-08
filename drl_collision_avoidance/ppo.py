@@ -4,7 +4,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 import numpy as np
-import gym
+import gymnasium as gym
 from gym import spaces
 from stable_baselines3 import PPO
 

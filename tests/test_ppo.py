@@ -15,7 +15,7 @@ import os
 import time
 import numpy as np
 import pytest
-import gym
+import gymnasium as gym
 
 from stable_baselines3 import PPO
 from drl_collision_avoidance.agents.ppo_agent import PPOAgent
