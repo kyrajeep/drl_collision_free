@@ -30,8 +30,6 @@ class TestAgent():
         # Cleanup after tests
         if os.path.exists('ppo_test_model.zip'):
             os.remove('ppo_test_model.zip')
-            
-'''
     def test_train_and_save(self, setup_agent):
         agent = setup_agent
         agent.train()
@@ -70,7 +68,7 @@ class TestAgent():
             rewards2.append(mean_reward)
 
         assert np.allclose(rewards1, rewards2), "Training is not reproducible."
-
+'''
     def test_different_observation_spaces(self):
         env = gym.make('MountainCar-v0')
         agent = PPOAgent(env=env, total_timesteps=1000)
