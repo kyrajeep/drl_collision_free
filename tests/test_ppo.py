@@ -17,15 +17,15 @@ import numpy as np
 import pytest
 import gymnasium as gym
 
-from stable_baselines3 import PPO
-from drl_collision_avoidance.agents.ppo_agent import PPOAgent
+#from stable_baselines3 import PPO
+from drl_collision_avoidance.agents.ppo_navigator import PPONavigator
 
 class TestAgent(): 
     @pytest.fixture(scope="class")
     def setup_agent(self):
         # Set up the agent with a simple environment
         env = gym.make('CartPole-v1')
-        agent = PPOAgent(env=env, total_timesteps=1000, save_path='ppo_test_model.zip')
+        agent = PPONavigator(env=env, total_timesteps=1000, save_path='ppo_test_model.zip')
         yield agent
         # Cleanup after tests
         if os.path.exists('ppo_test_model.zip'):
