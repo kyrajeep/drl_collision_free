@@ -5,8 +5,9 @@ from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 import numpy as np
 import gymnasium as gym
-from gym import spaces
+from gymnasium import spaces
 from stable_baselines3 import PPO
+from wandb.integration.sb3 import WandbCallback
 
 # Custom Gym Environment for Robot Collision Avoidance
 class RobotEnv(gym.Env):
@@ -87,7 +88,8 @@ def train_model():
     env = RobotEnv()
     model = PPO("MlpPolicy", env, verbose=1, learning_rate=3e-4,
                 batch_size=32,policy_kwargs={"net_arch": [64, 64]} )
-    model.learn(total_timesteps=50000)
+    
+    model.learn(total_timesteps=50000, callback =WandbCallback())
     model.save("ppo_collision_avoidance")
     return model
 

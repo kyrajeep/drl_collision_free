@@ -20,6 +20,7 @@ import gymnasium as gym
 #from stable_baselines3 import PPO
 from drl_collision_avoidance.ppo_navigator import PPONavigator
 
+
 class TestAgent(): 
     @pytest.fixture(scope="class")
     def setup_agent(self):
