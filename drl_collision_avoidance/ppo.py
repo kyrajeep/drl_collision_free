@@ -14,9 +14,9 @@ class RobotEnv(gym.Env):
     def __init__(self):
         super(RobotEnv, self).__init__()
         # Action space: linear velocity (v), angular velocity (w)
-        self.action_space = spaces.Box(low=np.array([-100.0, -2.0]), high=np.array([100.0, 2.0]), dtype=np.float32)
+        self.action_space = spaces.Box(low=np.array([-0.5, -1.0]), high=np.array([0.5, 1.0]), dtype=np.float32)
         # Observation space: laser scan + goal direction
-        self.observation_space = spaces.Box(low=0.0, high=100.0, shape=(11,), dtype=np.float32)
+        self.observation_space = spaces.Box(low=0.0, high=10.0, shape=(11,), dtype=np.float32)
         self.scan_data = np.ones(10) * 100.0  # TODO Placeholder: max range
         self.goal_angle = 0.0  # Relative angle to goal
         self.min_distance = 0.3  # Collision threshold
