@@ -10,18 +10,12 @@ on:
     branches: [master, main]
 
 jobs:
-  build:
-    env:
-      TERM: xterm-256color
-      FORCE_COLOR: 1
-
-    # Skip CI if [ci skip] in the commit message
-    if: !contains(toJSON(github.event.commits.*.message), '[ci skip]')
-    runs-on: ubuntu-latest
+  test:
+    runs-on: [linux, x64]
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12"]
-        include:
+          python-version: ["3.9", "3.10", "3.11", "3.12"]
+          include:
           # Default version
           - gymnasium-version: "1.0.0"
           # Add a new config to test gym<1.0
