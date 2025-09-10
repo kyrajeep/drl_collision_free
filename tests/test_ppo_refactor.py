@@ -11,7 +11,7 @@ class TestRobotEnv:
     """Tests for RobotEnv class."""
     
     def test_env_initialization(self):
-        """Test environment initializes correctly."""
+        """Does the custom environment initialize correctly?"""
         env = RobotEnv()
         
         assert env.action_space.shape == (2,)
@@ -20,7 +20,7 @@ class TestRobotEnv:
         assert env.max_steps == 100
         
     def test_reset_returns_valid_observation(self):
-        """Test reset returns valid observation."""
+        """Do the goal angle and scan data look valid after reset?"""
         env = RobotEnv()
         obs, info = env.reset(seed=42)
         
@@ -29,7 +29,8 @@ class TestRobotEnv:
         assert np.all(obs[:-1] >= 0)  # Scan data non-negative
         
     def test_step_with_valid_action(self):
-        """Test step with valid action."""
+        """Do obs, reward, terminated, truncated, info 
+        returns valid after a step?"""
         env = RobotEnv()
         env.reset(seed=42)
         
@@ -40,7 +41,7 @@ class TestRobotEnv:
         assert isinstance(reward, (int, float))
         assert isinstance(terminated, bool)
         assert isinstance(truncated, bool)
-        
+
     def test_collision_detection(self):
         """Test collision detection terminates episode."""
         env = RobotEnv(min_distance=0.5)
