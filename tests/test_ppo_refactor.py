@@ -3,6 +3,8 @@ import gymnasium as gym
 from gymnasium import spaces
 from stable_baselines3 import PPO
 import pytest
+
+from drl_collision_avoidance.ppo_refactor import RobotEnv, preprocess_laser_scan
 # ============= TESTS =============
 
 class TestRobotEnv:
